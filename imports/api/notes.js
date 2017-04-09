@@ -18,10 +18,10 @@ Meteor.methods({
     }
 
     return Notes.insert({
+      updatedAt: moment().valueOf(),
       title: '',
       body: '',
-      userId: this.userId,
-      updatedAt: moment.valueOf()
+      userId: this.userId
     });
   },
   'notes.remove'(_id) {
