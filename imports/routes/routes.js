@@ -43,7 +43,7 @@ export const routes = (
       <Route path="/" component={Login} privacy="unauth" />
       <Route path="/signup" component={Signup} privacy="unauth" />
       <Route path="/dashboard" component={Dashboard} privacy="auth" />
-      <Route path="/dashboard/:id" component={Dashboard} privacy="auth" onLeave={onLeaveNotePage} />
+      <Route path="/dashboard/:id" component={Dashboard} privacy="auth" onEnter={onEnterNotePage} onLeave={onLeaveNotePage} />
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>
