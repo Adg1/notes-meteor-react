@@ -53,7 +53,7 @@ export class Editor extends React.Component {
     } else {
       return (
         <p>
-          { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started'}
+          { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}
         </p>
       );
     }
