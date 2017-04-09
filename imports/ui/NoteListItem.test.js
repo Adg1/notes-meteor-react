@@ -3,25 +3,38 @@ import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
 
-import NoteListItem from './NoteListItem';
+import { notes } from '../fixtures/fixtures';
+import {NoteListItem} from './NoteListItem';
 
 if (Meteor.isClient) {
   describe('NoteListItem', function () {
-    it('should render title and timestamp', function () {
-      const title = 'My Title';
-      const updatedAt = 1491693891186;
-      const wrapper = mount( <NoteListItem note={{title,updatedAt}}/> );
+    let Session;
 
-      expect(wrapper.find('h5').text()).toBe(title);
-      expect(wrapper.find('p').text()).toBe('09/4/17');
+    beforeEach(() => {
+      Session = {
+        set: expect.createSpy()
+      }
+    });
+
+    it('should render title and timestamp', function () {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> );
+
+      expect(wrapper.find('h5').text()).toBe(notes[0].title);
+      expect(wrapper.find('p').text()).toBe('4/09/17');
     });
 
     it('should set default title if no title set', function () {
-      const title ='';
-      const updatedAt = 1491693891186;
-      const wrapper = mount( <NoteListItem note={{title,updatedAt}}/> );
+      const wrapper = mount( <NoteListItem note={notes[1]} Session={Session}/> );
 
       expect(wrapper.find('h5').text()).toBe('Untitled Note');
+    });
+
+    it('should call set on click', function () {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> );
+
+      wrapper.find('div').simulate('click');
+
+      expect(Session.set).toHaveBeenCalledWith('selectedNoteId', notes[0]._id);
     });
   });
 }

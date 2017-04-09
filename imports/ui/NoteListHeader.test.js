@@ -15,9 +15,5 @@ if (Meteor.isClient) {
 
       expect(spy).toHaveBeenCalledWith('notes.insert');
     });
-
-    it('should set default title if no title set', function () {
-
-    });
   });
 }
