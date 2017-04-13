@@ -33,11 +33,21 @@ a {
   color: $body-default-color;
 }
 
-input[type=text], input[type=email], input[type=password], textarea {
+input, input[type=email], input[type=password], textarea {
+  background-color: $grey;
   border: 1px solid $input-border;
   color: $body-default-color;
   font-size: $base-font-size;
   font-family: $body-default-font-family;
   margin-bottom: $space;
   padding: $input-spacing;
+}
+
+input:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus {
+  background-color: $dark-grey;
+  transition: background-color .3s ease;
+}
+
+*:focus {
+    outline: none;
 }

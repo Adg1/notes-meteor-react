@@ -1,5 +1,5 @@
 .editor {
-  background-color: white;
+  background-color: $light-grey;
   border: 1px solid $grey;
   display: flex;
   flex-direction: column;
@@ -24,6 +24,16 @@
   padding: $input-spacing;
   resize: none;
   -webkit-overflow-scrolling: touch;
+}
+
+.editor__title:focus {
+  background-color: $dark-grey;
+  transition: background-color .3s ease;
+}
+
+.editor__body:focus {
+  background-color: $dark-grey;
+  transition: background-color .3s ease;
 }
 
 .editor__message {

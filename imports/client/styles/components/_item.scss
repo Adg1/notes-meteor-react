@@ -1,6 +1,6 @@
 // Item List
 .item-list {
-  background-color: white;
+  background-color: $light-grey;
   border: 1px solid $grey;
   overflow-y: scroll;
   width: 100%;
@@ -22,12 +22,12 @@
 }
 
 .item:hover {
-  background-color: $light-grey;
-  border-left: $item-border-width solid $grey;
+  background-color: #dee1e4;
+  border-left: $item-border-width solid #adb6be;
 }
 
 .item--selected,.item--selected:hover {
-  background-color: $light-grey;
+  background-color: $dark-grey;
   border-left: $item-border-width solid $brand-primary;
 }
 
@@ -41,7 +41,7 @@
   font-weight: bold;
 }
 .item__subtitle {
-  color: $dark-grey;
+  color: $dark-grey-;
   margin: 0;
 }
 
