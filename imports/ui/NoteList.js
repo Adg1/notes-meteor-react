@@ -11,7 +11,6 @@ import NoteListEmptyItem from './NoteListEmptyItem';
 
 export class NoteList extends React.Component {
   renderNotesList() {
-    console.log('called');
     if (this.props.notes.length === 0 ) {
       return <NoteListEmptyItem/>;
     }
