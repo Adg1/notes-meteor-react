@@ -5,22 +5,43 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Notes } from '../api/notes';
 import NoteListHeader from './NoteListHeader';
+import SearchNotes from './SearchNotes';
 import NoteListItem from './NoteListItem';
 import NoteListEmptyItem from './NoteListEmptyItem';
 
-export const NoteList = (props) => {
-  return (
-    <div className="item-list">
-      <NoteListHeader/>
-      { props.notes.length === 0 ? <NoteListEmptyItem/> : undefined }
-      {props.notes.map((note) => {
+export class NoteList extends React.Component {
+  renderNotesList() {
+    console.log('called');
+    if (this.props.notes.length === 0 ) {
+      return <NoteListEmptyItem/>;
+    }
+    if (!this.props.searchText) {
+      return this.props.notes.map((note) => {
         return <NoteListItem key={note._id} note={note} />
-      })}
-    </div>
-  );
+      });
+    } else {
+      return this.props.notes.filter((note) => {
+        title = note.title.toLowerCase();
+        return title.indexOf(this.props.searchText) > -1;
+      }).map((note) => {
+        return <NoteListItem key={note._id} note={note} />
+      });
+    }
+
+  }
+  render() {
+    return (
+      <div className="item-list">
+        <NoteListHeader/>
+        <SearchNotes/>
+        {this.renderNotesList()}
+      </div>
+    );
+  }
 };
 
 NoteList.propTypes = {
+  searchText: React.PropTypes.string.isRequired,
   notes: React.PropTypes.array.isRequired
 };
 
@@ -29,6 +50,7 @@ export default createContainer(() => {
   Meteor.subscribe('notes');
 
   return {
+    searchText: Session.get("searchText"),
     notes: Notes.find({},{
       sort: {
         updatedAt: -1

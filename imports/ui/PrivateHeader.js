@@ -7,7 +7,7 @@ export const PrivateHeader = (props) => {
   const navImgSrc = props.isNavOpen ? '/images/x.svg' : '/images/bars.svg' ;
 
   return (
-    <div className="header">
+    <div className="header shadow">
       <div className="header__content">
         <img className="header__nav-toggle" src={navImgSrc} onClick={props.handleNavToggle}/>
         <h1 className="header__title">{props.title}</h1>
