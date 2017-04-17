@@ -15,6 +15,10 @@ body {
   font-size: $base-font-size;
 }
 
+svg {
+  margin: auto;
+}
+
 h1 {
   font-weight: 300;
   margin-bottom: $space;

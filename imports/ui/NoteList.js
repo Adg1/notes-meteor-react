@@ -8,7 +8,7 @@ import NoteListHeader from './NoteListHeader';
 import SearchNotes from './SearchNotes';
 import NoteListItem from './NoteListItem';
 import NoteListEmptyItem from './NoteListEmptyItem';
-import Loading from './Loading';
+import Loading from 'react-loading';
 
 export class NoteList extends React.Component {
   renderNotesList() {
@@ -31,7 +31,13 @@ export class NoteList extends React.Component {
         });
       }
     }
-    return <Loading/>;
+    return (
+      <div  className="loading">
+        <div className="loading__container" >
+          <Loading type="spin" color='#db4437' width="36px" height="36px"/>
+        </div>
+      </div>
+    );
 
   }
   render() {
