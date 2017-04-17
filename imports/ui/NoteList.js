@@ -12,6 +12,7 @@ import Loading from 'react-loading';
 
 export class NoteList extends React.Component {
   renderNotesList() {
+    console.log(this.props.loading);
     if (!this.props.loading) {
       if (this.props.notes.length === 0 ) {
         console.log("called");

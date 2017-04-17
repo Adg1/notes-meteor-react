@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { browserHistory } from 'react-router';
 
 import { Notes } from '../api/notes';
+import Loading from 'react-loading';
 
 export class Editor extends React.Component {
   constructor(props) {
@@ -40,32 +41,42 @@ export class Editor extends React.Component {
     this.props.browserHistory.push('/dashboard');
   };
   render() {
-    if (this.props.note) {
-      return (
-        <div className="editor">
-          <input className="editor__title" value={this.state.title} placeholder = "Title"
-            onChange={this.handleTitleChange.bind(this)}/>
-          <textarea className="editor__body" value={this.state.body} placeholder = "Your note here."
-            onChange={this.handleBodyChange.bind(this)} ></textarea>
-          <div>
-            <button className="button button--secondary" onClick={this.handleRemoval.bind(this)}>Delete Note</button>
+    if (!this.props.loading) {
+      if (this.props.note) {
+        return (
+          <div className="editor">
+            <input className="editor__title" value={this.state.title} placeholder = "Title"
+              onChange={this.handleTitleChange.bind(this)}/>
+            <textarea className="editor__body" value={this.state.body} placeholder = "Your note here."
+              onChange={this.handleBodyChange.bind(this)} ></textarea>
+            <div>
+              <button className="button button--secondary" onClick={this.handleRemoval.bind(this)}>Delete Note</button>
+            </div>
           </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="editor">
-          <p className="editor__message">
-            { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}
-          </p>
-        </div>
-      );
+        );
+      } else {
+        return (
+          <div className="editor">
+            <p className="editor__message">
+              { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}
+            </p>
+          </div>
+        );
+      }
     }
+    return (
+      <div  className="loading">
+        <div className="loading__container" >
+          <Loading type="spin" color='#db4437' width="36px" height="36px"/>
+        </div>
+      </div>
+    );
 
   }
 };
 
 Editor.propTypes = {
+  loading: React.PropTypes.bool.isRequired,
   note: React.PropTypes.object,
   selectedNoteId: React.PropTypes.string,
   call: React.PropTypes.func.isRequired,
@@ -74,9 +85,13 @@ Editor.propTypes = {
 
 export default createContainer(() => {
   const selectedNoteId = Session.get('selectedNoteId');
+  const subscription = Meteor.subscribe('notes');
+  const loading = !subscription.ready();
+  note = Notes.findOne(selectedNoteId);
   return {
+    loading,
     selectedNoteId,
-    note: Notes.findOne(selectedNoteId),
+    note,
     call: Meteor.call,
     browserHistory
   };
