@@ -85,8 +85,7 @@ export default createContainer(() => {
   const selectedNoteId = Session.get('selectedNoteId');
   const subscription = Meteor.subscribe('notes');
   const loading = !subscription.ready();
-  note = {};
-
+  const note = Notes.findOne(selectedNoteId);
   return {
     loading,
     selectedNoteId,
