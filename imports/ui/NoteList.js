@@ -12,7 +12,6 @@ import Loading from 'react-loading';
 
 export class NoteList extends React.Component {
   renderNotesList() {
-    console.log(this.props.loading);
     if (!this.props.loading) {
       if (this.props.notes.length === 0 ) {
         console.log("called");
@@ -34,9 +33,7 @@ export class NoteList extends React.Component {
     }
     return (
       <div  className="loading">
-        <div className="loading__container" >
-          <Loading type="spin" color='#db4437' width="36px" height="36px"/>
-        </div>
+        <Loading type="spin" color='#db4437' width="36px" height="36px"/>
       </div>
     );
 

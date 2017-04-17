@@ -66,9 +66,7 @@ export class Editor extends React.Component {
     }
     return (
       <div  className="loading">
-        <div className="loading__container" >
-          <Loading type="spin" color='#db4437' width="36px" height="36px"/>
-        </div>
+        <Loading type="spin" color='#db4437' width="36px" height="36px"/>
       </div>
     );
 
@@ -87,7 +85,8 @@ export default createContainer(() => {
   const selectedNoteId = Session.get('selectedNoteId');
   const subscription = Meteor.subscribe('notes');
   const loading = !subscription.ready();
-  note = Notes.findOne(selectedNoteId);
+  note = {};
+
   return {
     loading,
     selectedNoteId,
