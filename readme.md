@@ -19,3 +19,6 @@ Run the following command and view the reporter at localhost port 3000.
 ```
 npm test
 ```
+
+## Up and Running at
+https://noterious.herokuapp.com
